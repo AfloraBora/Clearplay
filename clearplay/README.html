@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>Clearplay help</title><style>body{font:15px/1.6 system-ui;max-width:800px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;font:inherit}</style><pre># Clearplay — YouTube Quality Lock
+
+A local Chrome extension for desktop YouTube watch pages. Defaults to the first available resolution at or above 1080p. Choose 1440p, 4K, or Highest available in the popup. If a source only offers a lower resolution, Clearplay uses its highest and explains the limitation.
+
+## Install
+
+1. Unzip clearplay.zip and move the clearplay folder to a permanent location.
+2. Disable your existing YouTube quality extension so the two do not compete.
+3. Open chrome://extensions and enable Developer mode.
+4. Click Load unpacked and choose the clearplay folder containing manifest.json.
+5. Pin Clearplay using Chrome’s Extensions menu. Refresh any already-open YouTube tabs.
+
+## Controls
+
+The compact glass popup contains quality, prebuffer, video-pill and click-sound controls, plus a playback status. Detailed player messages are available on the status tooltip. Click sounds are synthesized locally only when you interact with popup controls. The small on-page button toggles a bypass for this video; the next video uses your normal preference. Switch Quality lock off to return control to YouTube.
+
+Optional prebuffering waits for 5, 10 or 20 seconds ahead, once per video. It only pauses a video that is already playing, skips live streams, and never starts a video that was paused by you. Player interaction cancels the wait. If YouTube stops fetching while paused, a 30-second timeout leaves the video paused and asks you to press Play. Default prebuffering is off; quality locking still works independently.
+
+## Limits
+
+Clearplay 1.2 selects quality through YouTube&#x27;s existing desktop Settings → Quality menu. It no longer calls the old private quality setters. The menu may briefly appear during a quality change; an already-open user menu is left alone until closed. The current adapter recognises YouTube&#x27;s English Quality/Auto labels. Unsupported layouts/languages report an error instead of repeatedly restarting playback. A successful menu selection is applied once per video or preference change; status polling does not reissue it. Bypass selects Auto once. Restoration does not restart prebuffering. Decoded video dimensions must reach the selected resolution before the status says locked.
+
+YouTube still controls downloads and may not honour a preference. Clearplay cannot manufacture missing resolutions or promise uninterrupted playback on a slow connection. Standard desktop watch pages are supported, not Shorts, embeds, mobile or TV apps. Ads are left alone.
+
+## Privacy
+
+Only the storage permission is requested. Scripts run on www.youtube.com. Settings are saved locally; transient quality status is stored per tab in browser-session storage and removed when a tab closes. No watch history, titles, account identifiers, cookies or credentials are collected. There are no analytics, external libraries, remote assets or network requests made by the extension. YouTube itself continues its normal network activity.
+
+## Validation and maintenance
+
+Nine revised automated tests cover native-menu selection, minimum-resolution fallback, actual decoded-resolution reporting, idempotent bypass, bounded failures, cosmetic settings, disabled startup, prebuffering and navigation cancellation. The original 720p failure was reproduced in Chrome despite higher resolutions being offered. Live validation of this replacement is recorded separately in LOCAL-FIXES.md.
+
+Developer tests: npm install, then npm test. Node is not required to run the extension.
+</pre>
